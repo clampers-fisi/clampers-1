@@ -2,6 +2,7 @@ package edu.moduloalumno.service;
 
 import java.util.Date;
 import java.util.List;
+
 import edu.moduloalumno.entity.Recaudaciones;
 
 public interface IRecaudacionesService {
@@ -18,6 +19,7 @@ public interface IRecaudacionesService {
 	
 	List<Recaudaciones> getRecaudacionesByNomApeRecibo( String recibo, String nomApe);
 	
+	List<Recaudaciones> getRecaudacionReci(String recibo);
 	
 	List<Recaudaciones> getRecaudacionesByPosgrado();
 
@@ -33,9 +35,15 @@ public interface IRecaudacionesService {
 
 	void addRecaudaciones(Recaudaciones recaudaciones);
 
-	int updateRecaudaciones(Recaudaciones recaudaciones);
+	int updateRecaudaciones(Recaudaciones recaudaciones);	
+
+	void updateRecaudaciones(int idRec, String codAlum, Integer idProg);	
 	
 	int updateRecaudaciones(List<Recaudaciones> reacaudacionesList);
 
 	void deleteRecaudaciones(int idRecaudaciones);
+	
+	//agregado por miguel
+	List<Recaudaciones> getRecaudacionesPendiengesEntreFechas(Date fechaInicial, Date fechaFinal);
+	List<Recaudaciones> getRecaudacionesPorNombre(String nombresApellido);
 }

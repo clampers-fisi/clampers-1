@@ -2,6 +2,7 @@ package edu.moduloalumno.service.impl;
 
 import java.util.Date;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,7 @@ public class RecaudacionesServiceImpl implements IRecaudacionesService {
 		return recaudaciones;
 	}
 
+	
 	@Override
 	public List<Recaudaciones> getRecaudacionesByStartDateBetween(Date fechaInicial, Date fechaFinal) {
 
@@ -131,9 +133,38 @@ public class RecaudacionesServiceImpl implements IRecaudacionesService {
 		}
 		return update;
 	}
+
+	@Override
+	public void updateRecaudaciones(int idRec, String codAlum, Integer idProg) {
+		recaudacionesDAO.updateRecaudaciones(idRec,codAlum,idProg);
+	}
+
 	@Override
 	public void deleteRecaudaciones(int idRecaudaciones) {
 		recaudacionesDAO.deleteRecaudaciones(idRecaudaciones);
+	}
+
+	@Override
+	public List<Recaudaciones> getRecaudacionReci(String recibo) {
+		List<Recaudaciones> recaudacionesList = recaudacionesDAO.getRecaudacionReci(recibo);
+		
+		return recaudacionesList;
+	}
+	
+	
+	//agregado por miguel
+	@Override
+	public List<Recaudaciones> getRecaudacionesPendiengesEntreFechas(Date fechaInicial, Date fechaFinal){
+		System.out.println("iNGRESO AL SERVICE");
+		List<Recaudaciones> recaudacionesList = recaudacionesDAO.getRecaudacionesPendiengesEntreFechas(fechaInicial,
+				fechaFinal);
+		return recaudacionesList;
+	}
+	
+	@Override
+	public List<Recaudaciones> getRecaudacionesPorNombre(String nombresApellido){
+		List<Recaudaciones> recaudacionesList = recaudacionesDAO.getRecaudacionesPorNombre(nombresApellido);
+		return recaudacionesList;
 	}
 
 }

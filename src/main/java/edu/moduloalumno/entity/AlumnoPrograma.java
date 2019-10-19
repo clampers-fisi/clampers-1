@@ -27,7 +27,20 @@ public class AlumnoPrograma implements Serializable {
     private String dniM;
     
     private Integer idPrograma;
+    
+    private String nom_programa;
+    
+    private String siglaProg;
+    
+    
+    public String getSiglaProg() {
+		return siglaProg;
+	}
 
+	public void setSiglaProg(String siglaProg) {
+		this.siglaProg = siglaProg;
+	}
+    
 	public String getCodAlumno() {
 		return codAlumno;
 	}
@@ -114,6 +127,15 @@ public class AlumnoPrograma implements Serializable {
 
 	public void setIdPrograma(Integer idPrograma) {
 		this.idPrograma = idPrograma;
+	}
+
+	
+	public String getNom_programa() {
+		return nom_programa;
+	}
+
+	public void setNom_programa(String nom_programa) {
+		this.nom_programa = nom_programa;
 	}
 
 	@Override

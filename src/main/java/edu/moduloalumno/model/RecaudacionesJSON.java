@@ -34,6 +34,10 @@ public class RecaudacionesJSON implements Serializable {
 
     private Date fecha;
 
+    private String codAlum;
+
+    private Integer idProg;    
+
     private Boolean validado;
 
     private Alumno alumno;
@@ -135,6 +139,22 @@ public class RecaudacionesJSON implements Serializable {
         this.fecha = fecha;
     }
 
+    public String getCodAlum() {
+        return codAlum;
+    }
+
+    public void setCodAlum(String codAlum) {
+        this.codAlum = codAlum;
+    }
+   
+    public Integer getIdProg() {
+        return idProg;
+    }
+
+    public void setIdProg(Integer idProg) {
+        this.idProg = idProg;
+    }    
+
     public Boolean getValidado() {
         return validado;
     }
@@ -217,13 +237,21 @@ public class RecaudacionesJSON implements Serializable {
 	}
 
 	@Override
-	public String toString() {
+	/*public String toString() {
 		return "Recaudaciones [idRec=" + idRec + ", moneda=" + moneda + ", numero=" + numero + ", importe=" + importe
 				+ ", carnet=" + carnet + ", autoseguro=" + autoseguro + ", ave=" + ave + ", devolTran=" + devolTran
 				+ ", observacion=" + observacion + ", fecha=" + fecha + ", validado=" + validado + ", alumno=" + alumno
 				+ ", alumnoPrograma=" + alumnoPrograma + ", concepto=" + concepto + ", registroCarga=" + registroCarga
 				+ ", tipo=" + tipo + ", ubicacion=" + ubicacion + "]";
-	}
+	}*/
+
+    public String toString() {
+        return "Recaudaciones [idRec=" + idRec + ", moneda=" + moneda + ", numero=" + numero + ", importe=" + importe
+                + ", carnet=" + carnet + ", autoseguro=" + autoseguro + ", ave=" + ave + ", devolTran=" + devolTran
+                + ", observacion=" + observacion + ", fecha=" + fecha + ", codAlum=" + codAlum + ", idProg=" + idProg + ", validado=" + validado + ", alumno=" + alumno
+                + ", alumnoPrograma=" + alumnoPrograma + ", concepto=" + concepto + ", registroCarga=" + registroCarga
+                + ", tipo=" + tipo + ", ubicacion=" + ubicacion + "]";
+    }
 
 
 }

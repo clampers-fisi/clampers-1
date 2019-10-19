@@ -19,6 +19,7 @@ public interface IRecaudacionesDAO {
 	
 	List<Recaudaciones> getRecaudacionesByNomApeRecibo( String recibo, String nomApe);
 	
+	List<Recaudaciones> getRecaudacionReci(String recibo);
 	
 	List<Recaudaciones> getRecaudacionesByPosgrado();
 
@@ -35,7 +36,12 @@ public interface IRecaudacionesDAO {
 	void addRecaudaciones(Recaudaciones reacaudaciones);
 
 	int updateRecaudaciones(Recaudaciones reacaudaciones);
+
+	void updateRecaudaciones(int idRec, String codAlum, Integer idProg);
 	
 	void deleteRecaudaciones(int idRec);
 
+	//agregado por miguel
+	public List<Recaudaciones> getRecaudacionesPendiengesEntreFechas(Date fechaInicial, Date fechaFinal);
+	public List<Recaudaciones> getRecaudacionesPorNombre(String nombresApellido);
 }

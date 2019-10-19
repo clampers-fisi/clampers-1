@@ -52,6 +52,33 @@ public class RecaudacionesController {
 		return new ResponseEntity<List<Recaudaciones>>(list, HttpStatus.OK);
 	}
 	
+	
+	/* loco*/ 
+	@RequestMapping(value = "/rec/{recibo}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Recaudaciones>> getRecaudacionReci(@PathVariable("recibo") String recibo) {
+		logger.info("> getAllRecaudaciones [Recaudaciones]");
+		
+		List<Recaudaciones> list = null;
+
+		try {
+//			System.out.println("nro recibo = " + recibo);
+			list = recaudacionesService.getRecaudacionReci(recibo);
+			if (list == null) {
+				list = new ArrayList<Recaudaciones>();
+			}
+		} catch (Exception e) {
+			logger.error("Unexpected Exception caught.", e);
+			return new ResponseEntity<List<Recaudaciones>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		logger.info("< getRecaudacionesByNomApe [Recaudaciones]");
+//		System.out.println("retornando: "+list);
+		return new ResponseEntity<List<Recaudaciones>>(list, HttpStatus.OK);
+
+	}
+	
+	
+	
 	@RequestMapping(value = "/listar/{nomApe}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Recaudaciones>> getRecaudacionesByNomApe(@PathVariable("nomApe") String nomApe) {
 		logger.info("> getRecaudacionesByNomApe [Recaudaciones]");
@@ -199,4 +226,84 @@ public class RecaudacionesController {
 		return new ResponseEntity<List<Recaudaciones>>(list03, HttpStatus.OK);
 	}
 
+	 @RequestMapping(value = "/actualizar/{id_rec}/{cod_alumno}/{id_programa}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)	 																		  
+        public void updateRecaudaciones(@PathVariable("id_rec") Integer id_rec, @PathVariable("cod_alumno") String cod_alumno, @PathVariable("id_programa") Integer id_programa){
+            
+            logger.info("> Commo00n: " + id_rec + " " + cod_alumno + " " + id_programa);
+            Integer response = 0;
+            
+            try{
+                 recaudacionesService.updateRecaudaciones(id_rec, cod_alumno, id_programa);
+            } catch(Exception e){
+                logger.error("Unexpected Exception caught. "+ e.getMessage());
+            }
+            
+        } 
+	 @RequestMapping(value = "/desasignar/{id_rec}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)	 																		  
+     public void desasignarRecaudaciones(@PathVariable("id_rec") Integer id_rec){
+//         System.out.print("DESASIGNANDO: ");
+//         System.out.println(id_rec);
+//         logger.info("> Desasignando: " + id_rec );
+         
+         try{
+              recaudacionesService.updateRecaudaciones(id_rec, null, null);
+         } catch(Exception e){
+             logger.error("Unexpected Exception caught. "+ e.getMessage());
+         }
+         
+     } 
+
+	 @RequestMapping(value = "/listarPendientes/{fechaInicial}/{fechaFinal}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<List<Recaudaciones>> getRecaudacionesPendientesByStartDateBetween(@PathVariable("fechaInicial") String fechaInicial,
+				@PathVariable("fechaFinal") String fechaFinal) {
+		 
+//		 System.out.print("BUSCANDO PENDIENTES: ");
+
+			List<Recaudaciones> list = null;
+			Date fInicial;
+			Date fFinal;
+
+			DateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
+
+			try {
+
+				fInicial = formateador.parse(fechaInicial);
+				fFinal = formateador.parse(fechaFinal);
+
+				list = recaudacionesService.getRecaudacionesPendiengesEntreFechas(fInicial, fFinal);
+
+				if (list == null) {
+					list = new ArrayList<Recaudaciones>();
+				}
+
+			} catch (Exception e) {
+				logger.error("Unexpected Exception caught.", e);
+				return new ResponseEntity<List<Recaudaciones>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+
+//			logger.info("< getRecaudacionesByStartDateBetween [Recaudaciones]");
+			return new ResponseEntity<List<Recaudaciones>>(list, HttpStatus.OK);
+		}
+	 
+		@RequestMapping(value = "/listar/NombreApellido/{nomApe}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<List<Recaudaciones>> getRecaudacionesPorNombreApellido(@PathVariable("nomApe") String nomApe) {
+			logger.info("> getRecaudacionesPorNombreApellido " + nomApe);
+
+			List<Recaudaciones> list = null;
+
+			try {
+
+				list = recaudacionesService.getRecaudacionesPorNombre(nomApe);
+				if (list == null) {
+					list = new ArrayList<Recaudaciones>();
+				}
+
+			} catch (Exception e) {
+				logger.error("Unexpected Exception caught.", e);
+				return new ResponseEntity<List<Recaudaciones>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+
+			logger.info("< getRecaudacionesByNomApe [Recaudaciones]");
+			return new ResponseEntity<List<Recaudaciones>>(list, HttpStatus.OK);
+		}
 }
